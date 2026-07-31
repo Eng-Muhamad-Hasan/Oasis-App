@@ -10,9 +10,13 @@ import { Collapsible } from '@/components/ui/collapsible';
 import { WebBadge } from '@/components/web-badge';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { useTheme } from '@/hooks/use-theme';
+import { useMinimizeOnScroll } from "expo-glass-tabs";
+import Animated from 'react-native-reanimated';
 
 export default function TabTwoScreen() {
   const safeAreaInsets = useSafeAreaInsets();
+    const onScroll = useMinimizeOnScroll();
+
   const insets = {
     ...safeAreaInsets,
     bottom: safeAreaInsets.bottom + BottomTabInset + Spacing.three,
@@ -33,7 +37,9 @@ export default function TabTwoScreen() {
   });
 
   return (
-    <ScrollView
+    <Animated.ScrollView
+    onScroll={onScroll}
+    scrollEventThrottle={16}
       style={[styles.scrollView, { backgroundColor: theme.background }]}
       contentInset={insets}
       contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}>
@@ -121,7 +127,7 @@ export default function TabTwoScreen() {
         </ThemedView>
         {Platform.OS === 'web' && <WebBadge />}
       </ThemedView>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 
