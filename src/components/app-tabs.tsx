@@ -35,7 +35,6 @@ import {
   GlassTabBar,
   GlassTabButton,
   TabBarMinimizeProvider,
-  renderFadingTabScreen,
   type GlassTabItem,
 } from "expo-glass-tabs";
 import { Image } from "expo-image";
@@ -44,24 +43,24 @@ import { TabList, TabSlot, TabTrigger, Tabs } from "expo-router/ui";
 
 const ITEMS: (GlassTabItem & { href: string })[] = [
   {
-    name: "onboarding",
-    href: "/onboarding",
-    label: "Onboarding",
+    name: "home",
+    href: "/home",
+    label: "Home",
     renderIcon: ({ tint }) => (
       <Image
-        source={require("../../assets/images/expo-logo.png")}
+        source={require("../../assets/icons/home-glass.png")}
         tintColor={tint}
         style={{ width: 24, height: 24 }}
       />
     ),
   },
   {
-    name: "index",
-    href: "/",
-    label: "Home",
+    name: "bookings",
+    href: "/bookings",
+    label: "Bookings",
     renderIcon: ({ tint }) => (
       <Image
-        source={require("../../assets/icons/home-glass.png")}
+        source={require("../../assets/images/expo-logo.png")}
         tintColor={tint}
         style={{ width: 24, height: 24 }}
       />
@@ -86,7 +85,8 @@ export default function AppTabs() {
   return (
     <TabBarMinimizeProvider>
       <Tabs>
-        <TabSlot style={{ height: "100%" }} renderFn={renderFadingTabScreen} />
+        <TabSlot style={{ height: "100%" }} />
+        {/* <TabSlot style={{ height: "100%" }} renderFn={renderFadingTabScreen} /> */}
         <TabList asChild>
           <GlassTabBar
             onIndexSelected={(i) => router.navigate(ITEMS[i].href as never)}
@@ -104,12 +104,12 @@ export default function AppTabs() {
                 key={item.name}
                 name={item.name}
                 href={href as never}
-                renderToHardwareTextureAndroid
+
                 asChild
               >
                 <GlassTabButton
                   item={item}
-                  renderToHardwareTextureAndroid
+
                   index={index}
                 />
               </TabTrigger>

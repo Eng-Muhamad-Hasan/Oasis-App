@@ -25,8 +25,8 @@ export function RatingBar({ label, score, delay = 0 }: RatingBarProps) {
 
   return (
     <View className="flex-row items-center">
-      <Text className="w-[110px] font-jakarta-medium text-[13px] text-ink">{label}</Text>
-      <View className="h-[4px] flex-1 overflow-hidden rounded-full bg-chip">
+      <Text className="w-27.5 font-jakarta-medium text-[13px] text-ink">{label}</Text>
+      <View className="h-1 flex-1 overflow-hidden rounded-full bg-chip">
         <Animated.View className="h-full rounded-full bg-ink" style={fillStyle} />
       </View>
       <Text className="w-9 text-right font-jakarta-medium text-[12px] text-ink">

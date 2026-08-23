@@ -1,10 +1,13 @@
-import { View } from 'react-native';
-import { Image } from 'expo-image';
-import Animated, { ZoomIn } from 'react-native-reanimated';
+import { Image } from "expo-image";
+import { View } from "react-native";
+import Animated, { ZoomIn } from "react-native-reanimated";
 
-import { IMAGE_TRANSITION_MS } from '@/constants/animation';
-import { ONBOARDING_CENTER_PHOTO, ONBOARDING_ORBIT_PHOTOS } from '@/data/onboardingPhotos';
-import { shadows } from '@/theme';
+import { IMAGE_TRANSITION_MS } from "@/constants/animation";
+import {
+  ONBOARDING_CENTER_PHOTO,
+  ONBOARDING_ORBIT_PHOTOS,
+} from "@/data/onboardingPhotos";
+import { shadows } from "@/theme";
 
 import {
   CENTER_ENTER_DELAY_MS,
@@ -17,7 +20,7 @@ import {
   ORBIT_SLOTS,
   ORBIT_SPRING_DAMPING,
   PHOTO_RADIUS_RATIO,
-} from '../onboarding.constants';
+} from "../onboarding.constants";
 
 export function PhotoOrbit() {
   return (
@@ -37,16 +40,26 @@ export function PhotoOrbit() {
 
       {ORBIT_SLOTS.map((slot, index) => {
         const angleRad = (slot.angle * Math.PI) / 180;
-        const left = ORBIT_RING_SIZE / 2 + Math.cos(angleRad) * slot.radius - slot.size / 2;
-        const top = ORBIT_RING_SIZE / 2 + Math.sin(angleRad) * slot.radius - slot.size / 2;
+        const left =
+          ORBIT_RING_SIZE / 2 +
+          Math.cos(angleRad) * slot.radius -
+          slot.size / 2;
+        const top =
+          ORBIT_RING_SIZE / 2 +
+          Math.sin(angleRad) * slot.radius -
+          slot.size / 2;
         return (
           <Animated.View
             key={ONBOARDING_ORBIT_PHOTOS[index]}
-            entering={ZoomIn.delay(ORBIT_ENTER_DELAY_MS + index * ORBIT_ENTER_STAGGER_MS)
+            entering={ZoomIn.delay(
+              ORBIT_ENTER_DELAY_MS + index * ORBIT_ENTER_STAGGER_MS,
+            )
               .springify()
               .damping(ORBIT_SPRING_DAMPING)}
-            className="absolute overflow-hidden"
+            // className="absolute overflow-hidden"
             style={{
+              position: "absolute",
+              overflow: "hidden",
               left,
               top,
               width: slot.size,
@@ -64,7 +77,9 @@ export function PhotoOrbit() {
       })}
 
       <Animated.View
-        entering={ZoomIn.delay(CENTER_ENTER_DELAY_MS).springify().damping(CENTER_SPRING_DAMPING)}
+        entering={ZoomIn.delay(CENTER_ENTER_DELAY_MS)
+          .springify()
+          .damping(CENTER_SPRING_DAMPING)}
         className="absolute overflow-hidden rounded-[30px]"
         style={[
           {
@@ -76,7 +91,12 @@ export function PhotoOrbit() {
           shadows.featuredPhoto,
         ]}
       >
-        <Image source={ONBOARDING_CENTER_PHOTO} style={{ flex: 1 }} transition={IMAGE_TRANSITION_MS} />
+        <Image
+          source={ONBOARDING_CENTER_PHOTO}
+          contentFit="cover"
+          style={{ flex: 1 }}
+          transition={IMAGE_TRANSITION_MS}
+        />
       </Animated.View>
     </View>
   );

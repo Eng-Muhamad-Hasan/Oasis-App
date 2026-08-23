@@ -64,9 +64,9 @@ export function PriceRangeSlider({ range }: PriceRangeSliderProps) {
           />
 
           <View className="mt-2 justify-center" style={{ height: THUMB_SIZE + 8 }}>
-            <View className="h-[3px] rounded-full bg-line" />
+            <View className="h-0.75 rounded-full bg-line" />
             <Animated.View
-              className="absolute h-[3px] rounded-full bg-ink"
+              className="absolute h-0.75 rounded-full bg-ink"
               style={activeTrackStyle}
             />
             <SliderThumb

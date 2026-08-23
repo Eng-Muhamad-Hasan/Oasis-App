@@ -1,9 +1,9 @@
-import { Feather } from '@expo/vector-icons';
 
 import { palette } from '@/theme';
 
 import { PressableScale } from '../PressableScale';
 import { StepButtonProps } from './Stepper.types';
+import Feather from '@react-native-vector-icons/feather';
 
 export function StepButton({ icon, onPress }: StepButtonProps) {
   return (

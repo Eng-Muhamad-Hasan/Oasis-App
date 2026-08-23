@@ -1,47 +1,57 @@
-import { useState } from 'react';
-import { ScrollView } from 'react-native';
-import { useRouter } from 'expo-router';
-import Animated, { FadeInDown } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useStageSheet } from 'react-native-stage-sheet';
+import { useMinimizeOnScroll } from "expo-glass-tabs";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import Animated, { FadeInDown } from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
+// import { useStageSheet } from 'react-native-stage-sheet';
 
-import { SCREEN_ENTER_MS } from '@/constants/animation';
-import { ROUTES } from '@/constants/routes';
-import { DESTINATIONS } from '@/data/destinations';
-import { HOTELS, INITIAL_FAVORITE_HOTEL_IDS } from '@/data/hotels';
-import { BottomTab } from '@/enums';
-import { useFavorites } from '@/hooks/useFavorites';
+import { SCREEN_ENTER_MS } from "@/constants/animation";
+import { ROUTES } from "@/constants/routes";
+import { DESTINATIONS } from "@/data/destinations";
+import { HOTELS, INITIAL_FAVORITE_HOTEL_IDS } from "@/data/hotels";
+import { BottomTab } from "@/enums";
+import { useFavorites } from "@/hooks/useFavorites";
 
-import { BottomNav } from './components/BottomNav';
-import { DestinationCard } from './components/DestinationCard';
-import { FilterChipRow } from './components/FilterChipRow';
-import { GreetingHeader } from './components/GreetingHeader';
-import { HorizontalSection } from './components/HorizontalSection';
-import { HotelCard } from './components/HotelCard';
-import { SearchBarTrigger } from './components/SearchBarTrigger';
-import { SearchSheet } from './components/SearchSheet';
-import { HOTEL_FILTERS, SECTION_STAGGER_MS } from './home.constants';
+import { DestinationCard } from "./components/DestinationCard";
+import { FilterChipRow } from "./components/FilterChipRow";
+import { GreetingHeader } from "./components/GreetingHeader";
+import { HorizontalSection } from "./components/HorizontalSection";
+import { HotelCard } from "./components/HotelCard";
+import { SearchBarTrigger } from "./components/SearchBarTrigger";
+import { HOTEL_FILTERS, SECTION_STAGGER_MS } from "./home.constants";
 
 export function HomeScreen() {
   const router = useRouter();
-  const { present } = useStageSheet();
+  const onScroll = useMinimizeOnScroll();
+  // const { present } = useStageSheet();
   const [activeFilter, setActiveFilter] = useState(HOTEL_FILTERS[0]);
   const [activeTab, setActiveTab] = useState(BottomTab.Home);
-  const { isFavorite, toggleFavorite } = useFavorites(INITIAL_FAVORITE_HOTEL_IDS);
+  const { isFavorite, toggleFavorite } = useFavorites(
+    INITIAL_FAVORITE_HOTEL_IDS,
+  );
 
-  const openSearch = () =>
-    present({
-      render: ({ close, height, bottomInset }) => (
-        <SearchSheet height={height} bottomInset={bottomInset} onClose={close} />
-      ),
-    });
+  // const openSearch = () =>
+  //   present({
+  //     render: ({ close, height, bottomInset }) => (
+  //       <SearchSheet height={height} bottomInset={bottomInset} onClose={close} />
+  //     ),
+  //   });
 
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-32">
-        <Animated.View entering={FadeInDown.duration(SCREEN_ENTER_MS)} className="px-5 pt-2">
+    <SafeAreaView className="flex-1 bg-white" edges={["top"]}>
+      <Animated.ScrollView
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="pb-32"
+      >
+        <Animated.View
+          entering={FadeInDown.duration(SCREEN_ENTER_MS)}
+          className="px-5 pt-2"
+        >
           <GreetingHeader />
-          <SearchBarTrigger onPress={openSearch} />
+          <SearchBarTrigger onPress={() => {}} />
+          {/* <SearchBarTrigger onPress={openSearch} /> */}
         </Animated.View>
 
         <FilterChipRow
@@ -76,9 +86,9 @@ export function HomeScreen() {
             />
           ))}
         </HorizontalSection>
-      </ScrollView>
+      </Animated.ScrollView>
 
-      <BottomNav active={activeTab} onChange={setActiveTab} />
+      {/* <BottomNav active={activeTab} onChange={setActiveTab} /> */}
     </SafeAreaView>
   );
 }

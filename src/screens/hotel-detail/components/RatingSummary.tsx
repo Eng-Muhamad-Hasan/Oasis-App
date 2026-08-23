@@ -1,11 +1,11 @@
 import { Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
 import { RatingBar } from '@/components';
 import { Hotel } from '@/interfaces';
 import { palette } from '@/theme';
 
 import { RATING_BAR_BASE_DELAY_MS, RATING_BAR_STAGGER_MS } from '../hotelDetail.constants';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 type RatingSummaryProps = {
   hotel: Hotel;

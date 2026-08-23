@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import Animated, {
   cancelAnimation,
@@ -16,6 +15,7 @@ import Animated, {
 
 import { POP_SPRING, SETTLE_SPRING } from '@/constants/animation';
 import { shakeSequence } from '@/helpers/shakeSequence';
+import Feather from '@react-native-vector-icons/feather';
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 

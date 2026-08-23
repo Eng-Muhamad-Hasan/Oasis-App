@@ -1,10 +1,10 @@
 import { Pressable, Text } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { SCREEN_ENTER_MS } from '@/constants/animation';
 import { palette } from '@/theme';
+import Feather from '@react-native-vector-icons/feather';
 
 type FilterChipRowProps = {
   filters: string[];

@@ -1,10 +1,10 @@
-import { Ionicons } from '@expo/vector-icons';
-
+import {Ionicons} from '@react-native-vector-icons/ionicons'
 import { PressableScale } from '@/components';
 import { palette } from '@/theme';
 
 type CircleIconButtonProps = {
-  icon: keyof typeof Ionicons.glyphMap;
+  icon: any;
+  // icon: keyof typeof Ionicons.glyphMap;
   onPress: () => void;
 };
 

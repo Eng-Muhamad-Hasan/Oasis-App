@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 
 import { PressableScale, PriceRangeSlider, Stepper, usePriceRange } from '@/components';
@@ -18,6 +17,7 @@ import { LocationField } from './LocationField';
 import { PriceBoundsRow } from './PriceBoundsRow';
 import { PropertyTypeSelector } from './PropertyTypeSelector';
 import { SearchButton } from './SearchButton';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 type SearchSheetProps = {
   height: number;
@@ -119,7 +119,7 @@ export function SearchSheet({ height, bottomInset, onClose }: SearchSheetProps) 
 
         <View className="mt-7 flex-row gap-3">
           <PressableScale
-            className="h-[52px] flex-[0.8] items-center justify-center rounded-full border border-line bg-white"
+            className="h-13 flex-[0.8] items-center justify-center rounded-full border border-line bg-white"
             onPress={resetFilters}
           >
             <Text className="font-jakarta-semibold text-[14px] text-ink">Reset</Text>

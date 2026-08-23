@@ -1,5 +1,4 @@
 import { Pressable, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { Image } from 'expo-image';
 import Animated, {
@@ -13,6 +12,7 @@ import { NightlyRate, PressableScale } from '@/components';
 import { IMAGE_TRANSITION_MS } from '@/constants/animation';
 import { Hotel } from '@/interfaces';
 import { palette } from '@/theme';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 const HEART_POP_SPRING = { damping: 10, stiffness: 400 };
 const HEART_SETTLE_SPRING = { damping: 12, stiffness: 300 };
@@ -41,8 +41,8 @@ export function HotelCard({ hotel, favorite, onToggleFavorite, onPress }: HotelC
   };
 
   return (
-    <PressableScale scaleTo={0.97} className="w-[208px]" onPress={onPress}>
-      <View className="h-[156px] overflow-hidden rounded-2xl">
+    <PressableScale scaleTo={0.97} className="w-52" onPress={onPress}>
+      <View className="h-39 overflow-hidden rounded-2xl">
         <Image source={hotel.image} style={{ flex: 1 }} transition={IMAGE_TRANSITION_MS} />
         <Pressable
           hitSlop={8}

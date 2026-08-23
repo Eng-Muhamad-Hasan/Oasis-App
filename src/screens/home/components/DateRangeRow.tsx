@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { Pressable, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import Animated, {
   Easing,
@@ -15,6 +14,7 @@ import { palette } from '@/theme';
 
 import { CalendarPanel } from './CalendarPanel';
 import { CrossfadeText } from './CrossfadeText';
+import Feather from '@react-native-vector-icons/feather';
 
 const OPEN_MS = 400;
 const CLOSE_MS = 350;

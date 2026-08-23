@@ -1,9 +1,10 @@
 import { Pressable, TextInput } from 'react-native';
-import { Feather, Ionicons } from '@expo/vector-icons';
 
 import { palette } from '@/theme';
 
 import { SEARCH_BAR_PLACEHOLDER } from '../home.constants';
+import Feather from '@react-native-vector-icons/feather';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 type SearchBarTriggerProps = {
   onPress: () => void;

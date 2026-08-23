@@ -13,7 +13,7 @@ type DestinationCardProps = {
 
 export function DestinationCard({ destination }: DestinationCardProps) {
   return (
-    <PressableScale className="h-[148px] w-[172px] overflow-hidden rounded-2xl">
+    <PressableScale className="h-37 w-43 overflow-hidden rounded-2xl">
       <Image
         source={destination.image}
         style={{ position: 'absolute', width: '100%', height: '100%' }}

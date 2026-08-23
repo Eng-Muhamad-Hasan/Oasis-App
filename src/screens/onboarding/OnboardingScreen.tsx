@@ -1,31 +1,39 @@
-import { Text, View } from 'react-native';
-import * as Haptics from 'expo-haptics';
-import { useRouter } from 'expo-router';
-import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { Text, View } from "react-native";
+import * as Haptics from "expo-haptics";
+import { useRouter } from "expo-router";
+import Animated, { FadeIn, FadeInDown } from "react-native-reanimated";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-import { PressableScale } from '@/components/PressableScale';
+import { PressableScale } from "@/components/PressableScale";
 
-import { PhotoOrbit } from './components/PhotoOrbit';
+import { PhotoOrbit } from "./components/PhotoOrbit";
 import {
   CTA_ENTER_DELAY_MS,
   ONBOARDING_ENTER_MS,
   TAGLINE_ENTER_DELAY_MS,
-} from './onboarding.constants';
-import { ROUTES } from '@/constants/routes';
+} from "./onboarding.constants";
+import { ROUTES } from "@/constants/routes";
 
 export function OnboardingScreen() {
   const router = useRouter();
-
+  const insets = useSafeAreaInsets();
   const startExploring = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    router.replace('/home');
+    router.replace("/home");
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <View
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+      className="flex-1 bg-white"
+    >
       <View className="flex-row items-start justify-center pt-3">
-        <Text className="font-jakarta-semibold text-[15px] tracking-[3px] text-ink">ISLA</Text>
+        <Text className="font-jakarta-semibold text-[15px] tracking-[3px] text-ink">
+          Oasis
+        </Text>
         <Text className="font-jakarta-semibold text-[9px] text-ink">°</Text>
       </View>
 
@@ -34,27 +42,35 @@ export function OnboardingScreen() {
       </View>
 
       <Animated.View
-        entering={FadeInDown.delay(TAGLINE_ENTER_DELAY_MS).duration(ONBOARDING_ENTER_MS)}
+        entering={FadeInDown.delay(TAGLINE_ENTER_DELAY_MS).duration(
+          ONBOARDING_ENTER_MS,
+        )}
         className="items-center px-8"
       >
-        <Text className="font-jakarta-medium text-[13px] text-muted">Sun, sea and slow days</Text>
+        <Text className="font-jakarta-medium text-[13px] text-muted">
+          Sun, sea and slow days
+        </Text>
         <Text className="mt-2 text-center font-jakarta-semibold text-[30px] leading-9.5 tracking-[-0.5px] text-ink">
-          Your Mediterranean{'\n'}escape is a couple{'\n'}of taps away
+          Your Mediterranean{"\n"}escape is a couple{"\n"}of taps away
         </Text>
       </Animated.View>
 
       <Animated.View
-        entering={FadeIn.delay(CTA_ENTER_DELAY_MS).duration(ONBOARDING_ENTER_MS)}
+        entering={FadeIn.delay(CTA_ENTER_DELAY_MS).duration(
+          ONBOARDING_ENTER_MS,
+        )}
         className="px-5 pb-2 pt-8"
       >
         <PressableScale
           scaleTo={0.97}
-          className="h-14 items-center justify-center rounded-full bg-pill"
+          className="h-14 items-center justify-center rounded-full bg-blend-color bg-black"
           onPress={startExploring}
         >
-          <Text className="font-jakarta-semibold text-[15px] text-white">Off to the island</Text>
+          <Text className="font-jakarta-semibold text-[15px] text-white">
+            Off to the island
+          </Text>
         </PressableScale>
       </Animated.View>
-    </SafeAreaView>
+    </View>
   );
 }

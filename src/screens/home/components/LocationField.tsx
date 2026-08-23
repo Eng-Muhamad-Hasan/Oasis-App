@@ -1,7 +1,7 @@
 import { TextInput, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 
 import { palette } from '@/theme';
+import Feather from '@react-native-vector-icons/feather';
 
 type LocationFieldProps = {
   value: string;

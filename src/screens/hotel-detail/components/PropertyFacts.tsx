@@ -1,15 +1,16 @@
 import { Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 
 import { Hotel } from '@/interfaces';
 import { palette } from '@/theme';
+import Ionicons from '@react-native-vector-icons/ionicons';
 
 type PropertyFactsProps = {
   hotel: Hotel;
 };
 
 type PropertyFact = {
-  icon: keyof typeof Ionicons.glyphMap;
+  icon: any;
+  // icon: keyof typeof Ionicons.glyphMap;
   label: string;
 };
 
