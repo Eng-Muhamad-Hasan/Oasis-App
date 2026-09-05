@@ -1,6 +1,6 @@
 import { Pressable, TextInput } from 'react-native';
 
-import { palette } from '@/theme';
+import { colors } from '@/theme';
 
 import { SEARCH_BAR_PLACEHOLDER } from '../home.constants';
 import Feather from '@react-native-vector-icons/feather';
@@ -16,15 +16,15 @@ export function SearchBarTrigger({ onPress }: SearchBarTriggerProps) {
       className="mt-4 h-12 flex-row items-center rounded-full bg-field px-4"
       onPress={onPress}
     >
-      <Feather name="search" size={16} color={palette.muted} />
+      <Feather name="search" size={16} color={colors.dark.ink} />
       <TextInput
         editable={false}
         pointerEvents="none"
         placeholder={SEARCH_BAR_PLACEHOLDER}
-        placeholderTextColor={palette.faint}
+        placeholderTextColor={colors.dark.muted}
         className="ml-2.5 flex-1 font-jakarta text-[14px] text-ink"
       />
-      <Ionicons name="options-outline" size={18} color={palette.ink} />
+      <Ionicons name="options-outline" size={18} color={colors.dark.ink} />
     </Pressable>
   );
 }

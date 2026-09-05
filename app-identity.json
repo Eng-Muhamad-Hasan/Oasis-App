@@ -1,0 +1,9 @@
+{
+  "name": "Oasis Hotel",
+  "slug": "oasis-hotel",
+  "scheme": "oasishotel",
+  "supportEmail": "460995mhmdhsn@gmail.com",
+  "defaultWorkspaceName": "Oasis Hotel",
+  "iosBundleIdentifier": "com.codewithnomi.expoauth",
+  "androidPackage": "com.codewithnomi.expoauth"
+}

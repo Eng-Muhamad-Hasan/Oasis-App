@@ -2,7 +2,7 @@ import { Pressable, Text, View } from 'react-native';
 import * as Haptics from 'expo-haptics';
 
 import { CURRENT_USER } from '@/data/user';
-import { palette } from '@/theme';
+import { colors } from '@/theme';
 import Ionicons from '@react-native-vector-icons/ionicons';
 
 export function GreetingHeader() {
@@ -21,7 +21,7 @@ export function GreetingHeader() {
         className="h-11 w-11 items-center justify-center rounded-full active:bg-chip"
         onPress={() => Haptics.selectionAsync()}
       >
-        <Ionicons name="notifications-outline" size={21} color={palette.ink} />
+        <Ionicons name="notifications-outline" size={21} color={colors.dark.ink} />
         <View className="absolute right-1 top-0.5 h-4 w-4 items-center justify-center rounded-full bg-coral">
           <Text className="font-jakarta-semibold text-[9px] text-white">
             {CURRENT_USER.unreadNotifications}

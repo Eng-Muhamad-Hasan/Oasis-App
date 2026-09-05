@@ -3,17 +3,25 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
+    "@better-auth/drizzle-adapter": "^1.7.2",
+    "@better-auth/expo": "^1.7.2",
     "@expo-google-fonts/plus-jakarta-sans": "^0.4.2",
     "@expo/material-symbols": "^0.1.1",
     "@expo/ui": "~57.0.2",
+    "@hookform/resolvers": "^5.9.1",
+    "@neondatabase/serverless": "^1.1.0",
+    "@react-native-async-storage/async-storage": "^3.1.1",
     "@react-native-vector-icons/feather": "^13.1.2",
     "@react-native-vector-icons/ionicons": "^13.1.2",
     "@react-navigation/elements": "^2.9.29",
     "@react-navigation/native": "^7.3.7",
     "@react-navigation/native-stack": "^7.17.9",
     "@tanstack/react-query": "^5.101.1",
+    "better-auth": "^1.7.2",
     "clsx": "^2.1.1",
+    "drizzle-orm": "^0.45.2",
     "expo": "^57.0.0",
+    "expo-asset": "~57.0.16",
     "expo-blur": "^57.0.2",
     "expo-constants": "~57.0.2",
     "expo-dev-client": "~57.0.4",
@@ -25,20 +33,27 @@
     "expo-image": "~57.0.0",
     "expo-linear-gradient": "~57.0.0",
     "expo-linking": "~57.0.1",
+    "expo-local-authentication": "^57.0.2",
+    "expo-localization": "^57.0.1",
     "expo-location": "~57.0.2",
     "expo-maps": "~57.0.0",
+    "expo-network": "^57.0.1",
     "expo-router": "~57.0.2",
-    "expo-secure-store": "~57.0.0",
+    "expo-secure-store": "^57.0.3",
     "expo-splash-screen": "~57.0.1",
     "expo-status-bar": "~57.0.0",
     "expo-symbols": "^57.0.1",
     "expo-system-ui": "~57.0.0",
     "expo-web-browser": "~57.0.0",
+    "lottie-react-native": "^7.5.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-hook-form": "^7.87.0",
     "react-native": "0.86.0",
     "react-native-css": "^3.0.7",
     "react-native-gesture-handler": "~2.32.0",
+    "react-native-nitro-google-signin": "^2.1.0",
+    "react-native-nitro-modules": "^0.37.1",
     "react-native-reanimated": "^4.5.3",
     "react-native-safe-area-context": "^5.8.1",
     "react-native-screen-transitions": "^3.8.0",
@@ -46,31 +61,54 @@
     "react-native-svg": "^15.15.5",
     "react-native-web": "~0.21.0",
     "react-native-worklets": "0.10.0",
+    "sonner-native": "^0.27.0",
     "tailwind-merge": "^3.6.0",
     "uniwind": "^1.11.0",
+    "zod": "^4.5.4",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@react-native-community/cli": "latest",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/react": "~19.2.2",
+    "auth": "^1.7.2",
     "babel-preset-expo": "^57.0.5",
+    "dotenv": "^17.4.2",
+    "drizzle-kit": "^0.31.10",
     "expo-mcp": "~0.2.1",
     "postcss": "^8.5.25",
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^4.3.3",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.0"
   },
   "overrides": {
     "lightningcss": "1.30.1"
   },
   "scripts": {
-    "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "auth:schema": "auth generate --config src/server/auth/auth-cli.ts --output src/server/db/auth-schema.ts --yes",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "lint": "expo lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint && npm run test",
+    "audit:client": "expo export --platform web && node scripts/audit-client-bundle.mjs"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-native-nitro-google-signin"
+        ]
+      }
+    }
   },
   "private": true
 }

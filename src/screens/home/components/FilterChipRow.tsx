@@ -3,7 +3,7 @@ import * as Haptics from 'expo-haptics';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 
 import { SCREEN_ENTER_MS } from '@/constants/animation';
-import { palette } from '@/theme';
+import { colors } from '@/theme';
 import Feather from '@react-native-vector-icons/feather';
 
 type FilterChipRowProps = {
@@ -43,7 +43,7 @@ export function FilterChipRow({ filters, active, enterDelay, onSelect }: FilterC
             <Feather
               name="chevron-down"
               size={14}
-              color={isActive ? palette.white : palette.ink}
+              color={isActive ? colors.dark.accent : colors.dark.ink}
             />
           </Pressable>
         );

@@ -1,29 +1,29 @@
-import { palette } from './colors';
+import { colors } from './colors';
 
 export const shadows = {
   floatingBar: {
-    shadowColor: palette.black,
+    shadowColor: colors.dark.ink,
     shadowOpacity: 0.25,
     shadowRadius: 20,
     shadowOffset: { width: 0, height: 10 },
     elevation: 14,
   },
   sliderThumb: {
-    shadowColor: palette.black,
+    shadowColor: colors.dark.ink,
     shadowOpacity: 0.15,
     shadowRadius: 6,
     shadowOffset: { width: 0, height: 2 },
     elevation: 4,
   },
   halo: {
-    shadowColor: palette.halo,
+    shadowColor: colors.dark.ink,
     shadowOpacity: 0.45,
     shadowRadius: 36,
     shadowOffset: { width: 0, height: 0 },
     elevation: 12,
   },
   featuredPhoto: {
-    shadowColor: palette.black,
+    shadowColor: colors.dark.ink,
     shadowOpacity: 0.12,
     shadowRadius: 18,
     shadowOffset: { width: 0, height: 8 },
