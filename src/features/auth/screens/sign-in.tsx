@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, router } from "expo-router";
-import { Pressable, View } from "react-native";
+import { Link, router, useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
+import { Pressable, View } from "react-native";
 
 import { AppText } from "@/components/ui/app-text";
 import { Button } from "@/components/ui/button";
@@ -11,7 +11,6 @@ import {
   getSignInErrorMessage,
   isEmailNotVerifiedError,
 } from "@/features/auth/auth-errors";
-import { useAuth } from "@/features/auth/auth-provider";
 import { AuthFormHeader } from "@/features/auth/components/auth-form-header";
 import { SocialAuthButtons } from "@/features/auth/components/social-auth-buttons";
 import {
@@ -21,9 +20,12 @@ import {
 import { authClient } from "@/lib/auth/auth-client";
 import { appToast } from "@/lib/toast/app-toast";
 import { useAppTheme } from "@/theme/theme-provider";
+import { useAuthStore } from "@/utils/authStore";
 
 export default function SignInScreen() {
-  const { refreshSession } = useAuth();
+  const redirect = useRouter();
+  // const { refreshSession } = useAuth();
+  const { logOut } = useAuthStore();
   const { spacing } = useAppTheme();
   const {
     control,
@@ -57,7 +59,7 @@ export default function SignInScreen() {
         return;
       }
 
-      await refreshSession();
+      // await refreshSession();
     } catch {
       appToast.error("Sign-in failed", {
         description: "Check your connection and try again.",
@@ -149,6 +151,16 @@ export default function SignInScreen() {
           disabled={!isValid}
           size="md"
           onPress={() => void handleSubmit(submit)()}
+        />
+        <Button
+          label="Return to onboarding"
+          // loading={isSubmitting}
+          // disabled={!isValid}
+          size="md"
+          onPress={() => {
+            logOut();
+            redirect.dismissTo("/onboarding");
+          }}
         />
 
         <SocialAuthButtons />

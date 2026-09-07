@@ -4,16 +4,6 @@
 @layer theme {
   :root {
     /* -------------------------------------------------------------------------- */
-    /*                                    Fonts                                   */
-    /* -------------------------------------------------------------------------- */
-    --font-normal: "PlusJakartaSans-Regular";
-    --font-light: "PlusJakartaSans-Light";
-    --font-medium: "PlusJakartaSans-Medium";
-    --font-semibold: "PlusJakartaSans-SemiBold";
-    --font-bold: "PlusJakartaSans-Bold";
-    --font-extra-bold: "PlusJakartaSans-ExtraBold";
-    /* --font-mono: "FiraCode-Regular"; */
-    /* -------------------------------------------------------------------------- */
     /*                                Color Pallete                               */
     /* -------------------------------------------------------------------------- */
     --color-ink: oklch(0.2088 0.0042 264.48);
@@ -27,85 +17,99 @@
     --color-star: oklch(0.853 0.1628 85.16);
     --color-white: oklch(1 0 0);
     --color-black: oklch(0 0 0);
+    --color-dark: oklch(23.094% 0.00598 271.16);
+    --color-blue: #455ce9;
+
+    --color-dark-ultra: oklch(19.549% 0.00433 264.51);
     --color-slider-track: oklch(0.9211 0.004 106.48);
     --color-halo: oklch(0.6993 0 0);
-    /* -------------------------------------------------------------------------- */
-    /*                                spacing scale                               */
-    /* -------------------------------------------------------------------------- */
-    --spacing-1: 4px;
-    --spacing-2: 8px;
-    --spacing-3: 12px;
-    --spacing-4: 16px;
 
-    /* -------------------------------------------------------------------------- */
-    /*                                border radius                               */
-    /* -------------------------------------------------------------------------- */
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    /* -------------------------------------------------------------------------- */
-    /*                                   Themes                                   */
-    /* -------------------------------------------------------------------------- */
     @variant light {
+      /* -------------------------------------------------------------------------- */
+      /*                                Font Families                               */
+      /* -------------------------------------------------------------------------- */
+      --font-normal: "PlusJakartaSans-Regular";
+      --font-light: "PlusJakartaSans-Light";
+      --font-medium: "PlusJakartaSans-Medium";
+      --font-semibold: "PlusJakartaSans-SemiBold";
+      --font-bold: "PlusJakartaSans-Bold";
+      --font-extra: "PlusJakartaSans-ExtraBold";
+      /* --font-mono: "FiraCode-Regular"; */
+
       /* Backgrounds */
       --color-background: #ffffff;
       --color-background-secondary: #f9fafb;
       --color-card: #ffffff;
       --color-coral: oklch(0.6822 0.1756 26.4);
-    --color-star: oklch(0.853 0.1628 85.16);
-    --color-ink: oklch(0.2088 0.0042 264.48);
-    
-    /* Text colors */
-    --color-foreground: #111827;
-    --color-foreground-secondary: #6b7280;
-    --color-muted: #9ca3af;
-    
-    /* Borders */
-    --color-border: #e5e7eb;
-    --color-border-subtle: #f3f4f6;
-    
-    /* Interactive elements */
-    --color-primary: #3b82f6;
-    --color-primary-hover: #2563eb;
-    --color-danger: #ef4444;
-    --color-success: #10b981;
-    --color-warning: #f59e0b;
-  }
-  @variant dark {
-    /* Backgrounds */
-    --color-background: #000000;
-    --color-background-secondary: #111827;
-    --color-card: #1f2937;
-    --color-coral: oklch(0.6822 0.1756 26.4);
-    --color-ink: oklch(0.2088 0.0042 264.48);
-    --color-star: oklch(0.853 0.1628 85.16);
-    
+      --color-star: oklch(0.853 0.1628 85.16);
+      --color-ink: oklch(0.2088 0.0042 264.48);
+
       /* Text colors */
       --color-foreground: #ffffff;
-      --color-foreground-secondary: #9ca3af;
-      --color-muted: #6b7280;
+      --color-foreground-secondary: #6b7280;
+      --color-muted: #9ca3af;
 
       /* Borders */
-      --color-border: #374151;
-      --color-border-subtle: #1f2937;
+      --color-border: #e5e7eb;
+      --color-border-subtle: #f3f4f6;
 
       /* Interactive elements */
-      --color-primary: #3b82f6;
+      --color-primary: oklch(23.094% 0.00598 271.16);
+      --color-secondary: oklch(1 0 0);
       --color-primary-hover: #2563eb;
+
+      --color-dark: oklch(23.094% 0.00598 271.16);
+
       --color-danger: #ef4444;
       --color-success: #10b981;
       --color-warning: #f59e0b;
+      /* -------------------------------------------------------------------------- */
+      /*                                Font Size                                   */
+      /* -------------------------------------------------------------------------- */
+      --text-hero: 34px;
+      --text-title: 28px;
+      --text-subtitle: 22px;
+      --text-body: 16px;
+      --text-content: 14px;
+      --text-caption: 12px;
+      --text-small: 10px;
+
+      /* -------------------------------------------------------------------------- */
+      /*                                spacing scale                               */
+      /* -------------------------------------------------------------------------- */
+      --spacing-1: 4px;
+      --spacing-2: 8px;
+      --spacing-3: 12px;
+      --spacing-4: 16px;
+      --spacing-5: 20px;
+      --spacing-6: 24px;
+      /* -------------------------------------------------------------------------- */
+      /*                                border radius                               */
+      /* -------------------------------------------------------------------------- */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
     }
-    /* Premium theme variables */
-    @variant premium {
+    @variant dark {
+      /* -------------------------------------------------------------------------- */
+      /*                                Font Families                               */
+      /* -------------------------------------------------------------------------- */
+      --font-normal: "PlusJakartaSans-Regular";
+      --font-light: "PlusJakartaSans-Light";
+      --font-medium: "PlusJakartaSans-Medium";
+      --font-semibold: "PlusJakartaSans-SemiBold";
+      --font-bold: "PlusJakartaSans-Bold";
+      --font-extra: "PlusJakartaSans-ExtraBold";
+      /* --font-mono: "FiraCode-Regular"; */
+
       /* Backgrounds */
-      --color-background: #000000;
+      --color-background: oklch(23.094% 0.00598 271.16);
       --color-background-secondary: #111827;
       --color-card: #1f2937;
       --color-coral: oklch(0.6822 0.1756 26.4);
       --color-ink: oklch(0.2088 0.0042 264.48);
-    --color-star: oklch(0.853 0.1628 85.16);
+      --color-star: oklch(0.853 0.1628 85.16);
 
       /* Text colors */
       --color-foreground: #ffffff;
@@ -117,11 +121,109 @@
       --color-border-subtle: #1f2937;
 
       /* Interactive elements */
+      --color-dark: oklch(23.094% 0.00598 271.16);
+
       --color-primary: #3b82f6;
+      --color-secondary: oklch(1 0 0);
+
       --color-primary-hover: #2563eb;
       --color-danger: #ef4444;
       --color-success: #10b981;
       --color-warning: #f59e0b;
+      /* -------------------------------------------------------------------------- */
+      /*                                Font text                                   */
+      /* -------------------------------------------------------------------------- */
+      --text-hero: 34px;
+      --text-title: 28px;
+      --text-subtitle: 22px;
+      --text-body: 16px;
+      --text-content: 14px;
+      --text-caption: 12px;
+      --text-small: 10px;
+      /* -------------------------------------------------------------------------- */
+      /*                                spacing scale                               */
+      /* -------------------------------------------------------------------------- */
+      --spacing-1: 4px;
+      --spacing-2: 8px;
+      --spacing-3: 12px;
+      --spacing-4: 16px;
+      --spacing-5: 20px;
+      --spacing-6: 24px;
+      /* -------------------------------------------------------------------------- */
+      /*                                border radius                               */
+      /* -------------------------------------------------------------------------- */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+    }
+    /* Premium theme variables */
+    @variant premium {
+      /* -------------------------------------------------------------------------- */
+      /*                                Font Families                               */
+      /* -------------------------------------------------------------------------- */
+      --font-normal: "PlusJakartaSans-Regular";
+      --font-light: "PlusJakartaSans-Light";
+      --font-medium: "PlusJakartaSans-Medium";
+      --font-semibold: "PlusJakartaSans-SemiBold";
+      --font-bold: "PlusJakartaSans-Bold";
+      --font-extra: "PlusJakartaSans-ExtraBold";
+      /* --font-mono: "FiraCode-Regular"; */
+
+      /* Backgrounds */
+      --color-background: #1c1d20;
+      --color-background-secondary: #111827;
+      --color-card: #1f2937;
+      --color-coral: oklch(0.6822 0.1756 26.4);
+      --color-ink: oklch(0.2088 0.0042 264.48);
+      --color-star: oklch(0.853 0.1628 85.16);
+
+      /* Text colors */
+      --color-foreground: #ffffff;
+      --color-foreground-secondary: #9ca3af;
+      --color-muted: #6b7280;
+
+      /* Borders */
+      --color-border: #374151;
+      --color-border-subtle: #1f2937;
+
+      /* Interactive elements */
+      --color-dark: oklch(23.094% 0.00598 271.16);
+
+      --color-primary: #3b82f6;
+      --color-secondary: oklch(1 0 0);
+
+      --color-primary-hover: #2563eb;
+      --color-danger: #ef4444;
+      --color-success: #10b981;
+      --color-warning: #f59e0b;
+      /* -------------------------------------------------------------------------- */
+      /*                                Font text                                   */
+      /* -------------------------------------------------------------------------- */
+      --text-hero: 34px;
+      --text-title: 28px;
+      --text-subtitle: 22px;
+      --text-body: 16px;
+      --text-content: 14px;
+      --text-caption: 12px;
+      --text-small: 10px;
+      /* -------------------------------------------------------------------------- */
+      /*                                spacing scale                               */
+      /* -------------------------------------------------------------------------- */
+      --spacing-1: 4px;
+      --spacing-2: 8px;
+      --spacing-3: 12px;
+      --spacing-4: 16px;
+      --spacing-5: 20px;
+      --spacing-6: 24px;
+
+      /* -------------------------------------------------------------------------- */
+      /*                                border radius                               */
+      /* -------------------------------------------------------------------------- */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
     }
   }
 }
