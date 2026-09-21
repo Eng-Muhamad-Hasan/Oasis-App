@@ -31,6 +31,7 @@ export function Screen({ children, contentStyle, hasHeader = false, scroll = tru
           contentInsetAdjustmentBehavior="automatic"
           showsVerticalScrollIndicator={false}
           style={{ flex: 1 }}
+          
           contentContainerStyle={baseContentStyle}>
           {children}
         </ScrollView>

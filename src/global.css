@@ -4,6 +4,15 @@
 @layer theme {
   :root {
     /* -------------------------------------------------------------------------- */
+    /*                                Font Families                               */
+    /* -------------------------------------------------------------------------- */
+    --font-normal: "PlusJakartaSans-Regular";
+    --font-light: "PlusJakartaSans-Light";
+    --font-medium: "PlusJakartaSans-Medium";
+    --font-semibold: "PlusJakartaSans-SemiBold";
+    --font-bold: "PlusJakartaSans-Bold";
+    --font-extra: "PlusJakartaSans-ExtraBold";
+    /* -------------------------------------------------------------------------- */
     /*                                Color Pallete                               */
     /* -------------------------------------------------------------------------- */
     --color-ink: oklch(0.2088 0.0042 264.48);
@@ -19,23 +28,15 @@
     --color-black: oklch(0 0 0);
     --color-dark: oklch(23.094% 0.00598 271.16);
     --color-blue: #455ce9;
+    --color-tabgray: #e4e2e3;
+    --color-dangersoft: #f6ddd8;
+    --color-lavender: #f4eaf7;
 
     --color-dark-ultra: oklch(19.549% 0.00433 264.51);
     --color-slider-track: oklch(0.9211 0.004 106.48);
     --color-halo: oklch(0.6993 0 0);
 
     @variant light {
-      /* -------------------------------------------------------------------------- */
-      /*                                Font Families                               */
-      /* -------------------------------------------------------------------------- */
-      --font-normal: "PlusJakartaSans-Regular";
-      --font-light: "PlusJakartaSans-Light";
-      --font-medium: "PlusJakartaSans-Medium";
-      --font-semibold: "PlusJakartaSans-SemiBold";
-      --font-bold: "PlusJakartaSans-Bold";
-      --font-extra: "PlusJakartaSans-ExtraBold";
-      /* --font-mono: "FiraCode-Regular"; */
-
       /* Backgrounds */
       --color-background: #ffffff;
       --color-background-secondary: #f9fafb;
@@ -44,6 +45,7 @@
       --color-star: oklch(0.853 0.1628 85.16);
       --color-ink: oklch(0.2088 0.0042 264.48);
 
+      --color-tabgray: #e4e2e3;
       /* Text colors */
       --color-foreground: #ffffff;
       --color-foreground-secondary: #6b7280;
@@ -54,11 +56,14 @@
       --color-border-subtle: #f3f4f6;
 
       /* Interactive elements */
-      --color-primary: oklch(23.094% 0.00598 271.16);
+      --color-primary: oklch(19.549% 0.00433 264.51);
       --color-secondary: oklch(1 0 0);
       --color-primary-hover: #2563eb;
+      --color-lavender: #f4eaf7;
 
       --color-dark: oklch(23.094% 0.00598 271.16);
+      --color-lightgray: #f0f0f0;
+      --color-dangersoft: #f6ddd8;
 
       --color-danger: #ef4444;
       --color-success: #10b981;
@@ -92,17 +97,6 @@
       --radius-xl: 16px;
     }
     @variant dark {
-      /* -------------------------------------------------------------------------- */
-      /*                                Font Families                               */
-      /* -------------------------------------------------------------------------- */
-      --font-normal: "PlusJakartaSans-Regular";
-      --font-light: "PlusJakartaSans-Light";
-      --font-medium: "PlusJakartaSans-Medium";
-      --font-semibold: "PlusJakartaSans-SemiBold";
-      --font-bold: "PlusJakartaSans-Bold";
-      --font-extra: "PlusJakartaSans-ExtraBold";
-      /* --font-mono: "FiraCode-Regular"; */
-
       /* Backgrounds */
       --color-background: oklch(23.094% 0.00598 271.16);
       --color-background-secondary: #111827;
@@ -111,6 +105,7 @@
       --color-ink: oklch(0.2088 0.0042 264.48);
       --color-star: oklch(0.853 0.1628 85.16);
 
+      --color-tabgray: #e4e2e3;
       /* Text colors */
       --color-foreground: #ffffff;
       --color-foreground-secondary: #9ca3af;
@@ -122,11 +117,15 @@
 
       /* Interactive elements */
       --color-dark: oklch(23.094% 0.00598 271.16);
+      --color-lightgray: #f0f0f0;
 
       --color-primary: #3b82f6;
       --color-secondary: oklch(1 0 0);
 
       --color-primary-hover: #2563eb;
+      --color-dangersoft: #f6ddd8;
+      --color-lavender: #f4eaf7;
+
       --color-danger: #ef4444;
       --color-success: #10b981;
       --color-warning: #f59e0b;
@@ -159,17 +158,6 @@
     }
     /* Premium theme variables */
     @variant premium {
-      /* -------------------------------------------------------------------------- */
-      /*                                Font Families                               */
-      /* -------------------------------------------------------------------------- */
-      --font-normal: "PlusJakartaSans-Regular";
-      --font-light: "PlusJakartaSans-Light";
-      --font-medium: "PlusJakartaSans-Medium";
-      --font-semibold: "PlusJakartaSans-SemiBold";
-      --font-bold: "PlusJakartaSans-Bold";
-      --font-extra: "PlusJakartaSans-ExtraBold";
-      /* --font-mono: "FiraCode-Regular"; */
-
       /* Backgrounds */
       --color-background: #1c1d20;
       --color-background-secondary: #111827;
@@ -178,6 +166,7 @@
       --color-ink: oklch(0.2088 0.0042 264.48);
       --color-star: oklch(0.853 0.1628 85.16);
 
+      --color-tabgray: #e4e2e3;
       /* Text colors */
       --color-foreground: #ffffff;
       --color-foreground-secondary: #9ca3af;
@@ -189,11 +178,15 @@
 
       /* Interactive elements */
       --color-dark: oklch(23.094% 0.00598 271.16);
+      --color-lightgray: #f0f0f0;
 
       --color-primary: #3b82f6;
       --color-secondary: oklch(1 0 0);
 
       --color-primary-hover: #2563eb;
+      --color-dangersoft: #f6ddd8;
+      --color-lavender: #f4eaf7;
+
       --color-danger: #ef4444;
       --color-success: #10b981;
       --color-warning: #f59e0b;

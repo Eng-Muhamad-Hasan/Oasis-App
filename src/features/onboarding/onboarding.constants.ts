@@ -11,6 +11,7 @@ export const CENTER_SPRING_DAMPING = 13;
 export const TAGLINE_ENTER_DELAY_MS = 300;
 export const CTA_ENTER_DELAY_MS = 500;
 export const ONBOARDING_ENTER_MS = 500;
+export const ICON_SIZE = 18;
 
 export const ORBIT_SLOTS = [
   { angle: -100, radius: 128, size: 56 },

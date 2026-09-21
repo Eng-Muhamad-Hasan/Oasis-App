@@ -7,10 +7,12 @@
     "icon": "./assets/icon.png",
     "scheme": "oasis",
     "userInterfaceStyle": "automatic",
+
     "ios": {
       "icon": "./assets/expo.icon"
     },
     "android": {
+      "softwareKeyboardLayoutMode": "resize",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -26,6 +28,10 @@
     },
     "plugins": [
       "expo-router",
+      "expo-image",
+      "expo-maps",
+      "expo-splash-screen",
+      "expo-web-browser",
       [
         "expo-font",
         {
@@ -43,18 +49,12 @@
         "expo-localization",
         {
           "supportedLocales": {
-            "ios": [
-              "en",
-              "es"
-            ],
-            "android": [
-              "en",
-              "es"
-            ]
+            "ios": ["en", "es"],
+            "android": ["en", "es"]
           }
         }
       ],
-       [
+      [
         "expo-secure-store",
         {
           "configureAndroidBackup": true,

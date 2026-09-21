@@ -3,8 +3,8 @@
 // import { I18nProvider } from '@/i18n';
 import { AppThemeProvider } from '@/theme/theme-provider';
 
-import { AuthProvider } from "@/features/auth/auth-provider";
-import { BiometricLockProvider } from "@/features/biometrics/biometric-lock-provider";
+// import  AuthProvider  from "@/providers/auth-provider";
+// import { BiometricLockProvider } from "@/features/biometrics/biometric-lock-provider";
 import { QueryProvider } from "@/providers/query-provider";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
@@ -12,9 +12,12 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
     <AppThemeProvider>
     <QueryProvider>
       {/* <AuthProvider> */}
+
+      {/* <AuthProvider> */}
         {/* <BiometricLockProvider> */}
           {children}
           {/* </BiometricLockProvider> */}
+      {/* </AuthProvider> */}
       {/* </AuthProvider> */}
     </QueryProvider>
       </AppThemeProvider> 

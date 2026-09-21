@@ -3,6 +3,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // import { Icon } from '@/components/ui/icon';
 import { useAppTheme } from '@/theme/theme-provider';
+import { Icon } from '@/components/ui/icon';
 
 export function AppToaster() {
   const { colors, radius, resolvedTheme, spacing } = useAppTheme();
@@ -36,13 +37,13 @@ export function AppToaster() {
         warning: { borderColor: colors.warning, backgroundColor: colors.warningSoft },
         info: { borderColor: colors.info, backgroundColor: colors.infoSoft },
       }}
-      // icons={{
-      //   success: <Icon name="checkCircle" color={colors.success} size={26} />,
-      //   error: <Icon name="error" color={colors.danger} size={26} />,
-      //   warning: <Icon name="alert" color={colors.warning} size={26} />,
-      //   info: <Icon name="info" color={colors.info} size={26} />,
-      //   loading: <Icon name="refresh" color={colors.info} size={26} />,
-      // }}
+      icons={{
+        success: <Icon name="checkCircle" color={colors.success} size={26} />,
+        error: <Icon name="error" color={colors.danger} size={26} />,
+        warning: <Icon name="alert" color={colors.warning} size={26} />,
+        info: <Icon name="info" color={colors.info} size={26} />,
+        loading: <Icon name="refresh" color={colors.info} size={26} />,
+      }}
     />
   );
 }

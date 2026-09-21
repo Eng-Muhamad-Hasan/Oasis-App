@@ -1,10 +1,11 @@
-import { Stack } from 'expo-router/stack';
+import { Stack } from "expo-router/stack";
 
-import { useAppTheme } from '@/theme/theme-provider';
+import { useAuthStore } from "@/store/authStore";
+import { useAppTheme } from "@/theme/theme-provider";
 
 export default function AuthLayout() {
   const { colors } = useAppTheme();
-
+  const { shouldCreateAccount } = useAuthStore();
   return (
     <Stack
       initialRouteName="sign-in"
@@ -12,6 +13,11 @@ export default function AuthLayout() {
         headerShown: false,
         contentStyle: { backgroundColor: colors.background },
       }}
-    />
+    >
+      <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+      <Stack.Protected guard={shouldCreateAccount}>
+        <Stack.Screen name="sign-up" />
+      </Stack.Protected>
+    </Stack>
   );
 }

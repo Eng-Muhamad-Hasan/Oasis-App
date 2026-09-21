@@ -1,22 +1,28 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, router } from 'expo-router';
-import { Pressable, View } from 'react-native';
-import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, router } from "expo-router";
+import { Controller, useForm } from "react-hook-form";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
-import { AppText } from '@/components/ui/app-text';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Screen } from '@/components/ui/screen';
-import { authPolicy } from '@/features/auth/config/auth-policy';
-import { getSignUpErrorMessage } from '@/features/auth/auth-errors';
-import { AuthFormHeader } from '@/features/auth/components/auth-form-header';
-import { SocialAuthButtons } from '@/features/auth/components/social-auth-buttons';
-import { signUpSchema, type SignUpValues } from '@/features/auth/validation/auth-schemas';
-import { authClient } from '@/lib/auth/auth-client';
-import { appToast } from '@/lib/toast/app-toast';
-import { useAppTheme } from '@/theme/theme-provider';
+import { AppText } from "@/components/ui/app-text";
+// import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { getSignUpErrorMessage } from "@/features/auth/auth-errors";
+import { AuthFormHeader } from "@/features/auth/components/auth-form-header";
+import { authPolicy } from "@/features/auth/config/auth-policy";
+import {
+  signUpSchema,
+  type SignUpValues,
+} from "@/features/auth/validation/auth-schemas";
+import { Button } from "@/shared/button";
 
-export default function SignUpScreen() {
+import { supabase } from "@/lib/supabase";
+import { appToast } from "@/lib/toast/app-toast";
+import { useAppTheme } from "@/theme/theme-provider";
+import { Image } from "expo-image";
+import { CircularLoader } from "@/shared/circular-loader";
+const Brand = require("@/assets/images/Brand-Logo.svg");
+
+export function SignUpScreen() {
   const { spacing } = useAppTheme();
   const {
     control,
@@ -24,41 +30,64 @@ export default function SignUpScreen() {
     formState: { isSubmitting, isValid },
   } = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
-    mode: 'onChange',
+    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
+    mode: "onChange",
   });
 
   async function submit(values: SignUpValues) {
     const email = values.email.trim().toLowerCase();
 
     try {
-      const result = await authClient.signUp.email({
-        name: values.name.trim(),
-        email,
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.signUp({
+        email: email,
         password: values.password,
       });
 
-      if (result.error) {
-        appToast.error('Account creation failed', { description: getSignUpErrorMessage(result.error) });
+      // const result = await authClient.signUp.email({
+      //   name: values.name.trim(),
+      //   email,
+      //   password: values.password,
+      // });
+
+      if (error) {
+        appToast.error("Account creation failed", {
+          description: getSignUpErrorMessage(error),
+        });
         return;
       }
 
-      router.replace({ pathname: '/verify-email', params: { email } });
+      if (!session)
+        appToast.warning("Please check your inbox for email verification!");
+
+      router.replace({ pathname: "/sign-in", params: { email } });
     } catch {
-      appToast.error('Account creation failed', {
-        description: 'Check your connection and try again.',
+      appToast.error("Account creation failed", {
+        description: "Check your connection and try again.",
       });
     }
   }
 
   return (
-    <Screen
-      scroll={false}
-      contentStyle={{ justifyContent: 'center', width: '100%', maxWidth: 480, alignSelf: 'center', paddingHorizontal: 0 }}>
-      <View style={{ gap: spacing.md, paddingHorizontal: spacing.xl, paddingVertical: spacing.xl }}>
+    <ScrollView
+      contentContainerClassName="flex-1"
+      contentInsetAdjustmentBehavior="automatic"
+      showsVerticalScrollIndicator={false}
+
+      automaticallyAdjustKeyboardInsets
+      scrollEnabled
+    >
+      <View className="flex-1 justify-center px-6 gap-3">
+        <Image
+          source={Brand}
+          contentFit="contain"
+          style={{ height: "15%", width: "35%", alignSelf: "center" }}
+        />
         <AuthFormHeader
-          title="Create your account"
-          body={`Use a password with at least ${authPolicy.minimumPasswordLength} characters.`}
+          title="Join to our family"
+          body={'Start your journey with new experience'}
         />
 
         <Controller
@@ -138,24 +167,60 @@ export default function SignUpScreen() {
             />
           )}
         />
-        <Button
-          label="Create account"
-          loading={isSubmitting}
+        <Button.Root
+          isLoading={isSubmitting}
+          loadingBackgroundColor="#000"
           disabled={!isValid}
-          size="md"
-          onPress={() => void handleSubmit(submit)()}
-        />
+          onPress={
+            () => void handleSubmit(submit)()
+            // logOut();
+            // redirect.dismissTo("/onboarding");
+          }
+        >
+          <Button.Content>
+            <View
+              className={`${isValid ? "opacity-100" : "opacity-90"} flex-row bg-primary h-14 rounded-full flex-1 items-center justify-center gap-2.5`}
+            >
+              {/* <Ionicons name="arrow-forward" size={18} color="#ffffff" /> */}
+              <Text className="text-secondary font-semibold text-body">
+              Create Account
+              </Text>
+            </View>
+          </Button.Content>
 
-        <SocialAuthButtons />
+          <Button.Loading>
+            <Button.Indicator>
+              <CircularLoader
+                activeColor="#fff"
+                size={18}
+                strokeWidth={2.5}
+                enableBlur
+                gradientLength={50}
+                duration={500}
+              />
+            </Button.Indicator>
+            <Button.Label className="text-secondary p-3 font-semibold">
+              Submitting ..
+            </Button.Label>
+          </Button.Loading>
+        </Button.Root>
+
+        {/* <SocialAuthButtons /> */}
 
         <Link href="/sign-in" asChild>
-          <Pressable accessibilityRole="button" style={{ alignSelf: 'center', padding: spacing.xs }}>
+          <Pressable
+            accessibilityRole="button"
+            style={{ alignSelf: "center", padding: spacing.xs }}
+          >
             <AppText variant="caption" tone="muted">
-              Already have an account? <AppText variant="caption" tone="primary">Sign in</AppText>
+              Already have an account?{" "}
+              <AppText variant="caption" tone="primary">
+                Sign in
+              </AppText>
             </AppText>
           </Pressable>
         </Link>
       </View>
-    </Screen>
+    </ScrollView>
   );
 }

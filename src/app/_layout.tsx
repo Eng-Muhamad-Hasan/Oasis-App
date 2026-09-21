@@ -7,54 +7,83 @@ import "../global.css";
 
 import { IntroRevealProvider, SplashOverlay } from "@/components/splash";
 import { AppProviders } from "@/providers/app-providers";
-import { useAuthStore } from "@/utils/authStore";
+import { useAuthStore } from "@/store/authStore";
 import { useEffect, useState } from "react";
+import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StatusBar } from "react-native";
+import { useAuthListener } from "@/features/auth/hooks/use-auth-listener";
+import { useOnboardingStore } from "@/features/onboarding/onboarding-store";
 
 SplashScreen.preventAutoHideAsync();
 
+// function RootNavigator() {
+//   const { isLoggedIn, hasCompletedOnboarding, _hasHydrated } = useAuthStore();
+//   useEffect(() => {
+//     if (_hasHydrated) {
+//       SplashScreen.hideAsync();
+//     }
+//   }, [_hasHydrated]);
+
+//   if (!_hasHydrated) {
+//     return null;
+//   }
+
+//   return (
+//     <>
+//       <StatusBar barStyle={"default"} />
+//       <Stack>
+//         <Stack.Protected guard={isLoggedIn}>
+//           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+//           <Stack.Screen name="hotel/[id]" options={{ headerShown: false }} />
+//           <Stack.Screen name="(modals)" options={{ presentation: "modal" }} />
+//         </Stack.Protected>
+
+//         <Stack.Protected guard={!isLoggedIn && hasCompletedOnboarding}>
+//           <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+//         </Stack.Protected>
+
+//         <Stack.Protected guard={!hasCompletedOnboarding}>
+//           <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+//         </Stack.Protected>
+//       </Stack>
+//     </>
+//   );
+// }
+
 function RootNavigator() {
-  const {
-    isLoggedIn,
-    shouldCreateAccount,
-    hasCompletedOnboarding,
-    _hasHydrated,
-  } = useAuthStore();
+  useAuthListener();
 
+  const status = useAuthStore((s) => s.status);
+  const isRecovering = useAuthStore((s) => s.isRecovering);
+  const hasHydrated = useOnboardingStore((s) => s.hasHydrated);
+  const hasCompletedOnboarding = useOnboardingStore(
+    (s) => s.hasCompletedOnboarding,
+  );
+
+  const ready = hasHydrated && status !== "initializing";
   useEffect(() => {
-    if (_hasHydrated) {
-      SplashScreen.hideAsync();
-    }
-  }, [_hasHydrated]);
+    if (ready) SplashScreen.hideAsync();
+  }, [ready]);
+  if (!ready) return null;
 
-  if (!_hasHydrated) {
-    return null;
-  }
+  const isSignedIn = status === "signed-in" && !isRecovering;
 
   return (
-    <>
-      <StatusBar barStyle={"default"} />
-      <Stack>
-        <Stack.Protected guard={isLoggedIn}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="hotel/[id]" options={{ headerShown: false }} />
-          <Stack.Screen name="(modals)" options={{ presentation: "modal" }} />
-        </Stack.Protected>
-
-        <Stack.Protected guard={!isLoggedIn && hasCompletedOnboarding}>
-          <Stack.Screen name="(auth)/sign-in" />
-          <Stack.Protected guard={shouldCreateAccount}>
-            <Stack.Screen name="(auth)/sign-up" />
-          </Stack.Protected>
-        </Stack.Protected>
-
-        <Stack.Protected guard={!hasCompletedOnboarding}>
-          <Stack.Screen name="onboarding" options={{ headerShown: false }} />
-        </Stack.Protected>
-      </Stack>
-    </>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Protected guard={!hasCompletedOnboarding}>
+        <Stack.Screen name="onboarding" />
+      </Stack.Protected>
+      <Stack.Protected guard={hasCompletedOnboarding && !isSignedIn}>
+        <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+      <Stack.Protected guard={isSignedIn}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="hotel/[id]" />
+        <Stack.Screen name="(modals)" options={{ presentation: "modal" }} />
+      </Stack.Protected>
+      <Stack.Screen name="(public)" />
+    </Stack>
   );
 }
 
@@ -72,19 +101,19 @@ export default function RootLayout() {
         }}
       >
         <AppProviders>
-        {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
-        <IntroRevealProvider value={revealed}>
-          <RootNavigator />
-          {!splashDone ? (
-            <SplashOverlay
-              onReveal={() => setRevealed(true)}
-              onDone={() => {
-                setSplashDone(true);
-              }}
-            />
-          ) : null}
-          {/* <AppToaster /> */}
-        </IntroRevealProvider>
+          {/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+          <IntroRevealProvider value={revealed}>
+            <RootNavigator />
+            {!splashDone ? (
+              <SplashOverlay
+                onReveal={() => setRevealed(true)}
+                onDone={() => {
+                  setSplashDone(true);
+                }}
+              />
+            ) : null}
+            {/* <AppToaster /> */}
+          </IntroRevealProvider>
         </AppProviders>
         {/* </ThemeProvider> */}
       </SafeAreaListener>

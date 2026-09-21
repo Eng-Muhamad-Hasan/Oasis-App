@@ -2,7 +2,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from "expo-router";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { useColorScheme } from "react-native";
 
-import { appStorage } from "@/lib/storage/app-storage";
+// import { appStorage } from "@/lib/storage/app-storage";
 import { colors } from "@/theme/colors";
 import { motion } from "@/theme/motion";
 import { radius } from "@/theme/radius";
@@ -12,8 +12,8 @@ import { typography } from "@/theme/typography";
 export type ThemeMode = "system" | "light" | "dark";
 export type ResolvedTheme = "light" | "dark";
 
-const themePreferenceKey = "theme-mode";
-const themeModes: ThemeMode[] = ["system", "light", "dark"];
+// const themePreferenceKey = "theme-mode";
+// const themeModes: ThemeMode[] = ["system", "light", "dark"];
 
 type AppThemeContextValue = {
   colors: (typeof colors)[ResolvedTheme];
@@ -43,15 +43,15 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     let cancelled = false;
 
-    appStorage
-      .get<ThemeMode>(themePreferenceKey, "system")
-      .then((storedMode) => {
-        if (!cancelled && themeModes.includes(storedMode))
-          setStoredMode(storedMode);
-      })
-      .finally(() => {
-        if (!cancelled) setIsReady(true);
-      });
+    // appStorage
+    //   .get<ThemeMode>(themePreferenceKey, "system")
+    //   .then((storedMode) => {
+    //     if (!cancelled && themeModes.includes(storedMode))
+    //       setStoredMode(storedMode);
+    //   })
+    //   .finally(() => {
+    //     if (!cancelled) setIsReady(true);
+    //   });
 
     return () => {
       cancelled = true;
@@ -60,9 +60,9 @@ export function AppThemeProvider({ children }: { children: React.ReactNode }) {
 
   function setMode(nextMode: ThemeMode) {
     setStoredMode(nextMode);
-    void appStorage.set(themePreferenceKey, nextMode).catch(() => {
+    // void appStorage.set(themePreferenceKey, nextMode).catch(() => {
       // The selected mode remains active for this session and can be saved again later.
-    });
+    // });
   }
 
   const value = useMemo(

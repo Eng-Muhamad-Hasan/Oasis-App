@@ -5,26 +5,33 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { PressableScale } from "@/components/PressableScale";
 
-import { useAuthStore } from "@/utils/authStore";
+import { GoogleGlyph } from "../components/GoogleGlyph";
 import { PhotoOrbit } from "../components/PhotoOrbit";
+import { useOnboardingStore } from "../onboarding-store";
 import {
   CTA_ENTER_DELAY_MS,
   ONBOARDING_ENTER_MS,
   TAGLINE_ENTER_DELAY_MS,
 } from "../onboarding.constants";
 
-const TAGLINE = ["Sun, sea and slow days", 'Cozy rooms and warm nights', 'Special Service and local vibes'];
+const TAGLINE = [
+  "Cozy rooms and warm nights",
+  "Sun, sea and slow days",
+  "Special Service and local vibes",
+];
 const TITLE = [
   "Your Mediterranean escape is a couple of taps away",
+  "Your best hotel in the heart of the city",
   "It's time to unwind and relax in style",
   "Unique experience that will make your stay unforgettable",
 ];
 
-const BUTTON_TEXT = ['Next','Next',"Get Started"];
+const BUTTON_TEXT = ["Next", "Next", "Get Started"];
 
 export function OnboardingScreen() {
   const insets = useSafeAreaInsets();
-  const { completeOnboarding } = useAuthStore();
+  // const { completeOnboarding } = useAuthStore();
+  const { completeOnboarding } = useOnboardingStore();
   const startExploring = () => {
     Haptics.performAndroidHapticsAsync(Haptics.AndroidHaptics.Confirm);
     completeOnboarding();
@@ -64,15 +71,25 @@ export function OnboardingScreen() {
         entering={FadeIn.delay(CTA_ENTER_DELAY_MS).duration(
           ONBOARDING_ENTER_MS,
         )}
-        className="pb-2 pt-5"
+        className="pb-2 pt-5 gap-5"
       >
+        <PressableScale
+          scaleTo={0.97}
+          className="h-14 flex-row gap-2.5 items-center justify-center  rounded-full bg-blend-color bg-lavender"
+          onPress={startExploring}
+        >
+          <GoogleGlyph />
+          <Text className="font-semibold text-body text-primary">
+            Continue with Google
+          </Text>
+        </PressableScale>
         <PressableScale
           scaleTo={0.97}
           className="h-14 items-center justify-center rounded-full bg-blend-color bg-primary"
           onPress={startExploring}
         >
-          <Text className="font-jakarta-semibold text-body text-secondary">
-            Get Started
+          <Text className="font-semibold text-body text-secondary">
+            Sign in with email
           </Text>
         </PressableScale>
       </Animated.View>

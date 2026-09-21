@@ -1,9 +1,7 @@
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
-import * as SecureStore from "expo-secure-store";
 import { UserState } from "@/types/user-state";
-
-
+import * as SecureStore from "expo-secure-store";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 export const useAuthStore = create(
   persist<UserState>(
@@ -13,6 +11,14 @@ export const useAuthStore = create(
       hasCompletedOnboarding: false,
       isVip: false,
       _hasHydrated: false,
+      signUp: () => {
+        set((state) => {
+          return {
+            ...state,
+            shouldCreateAccount: true,
+          };
+        });
+      },
       logIn: () => {
         set((state) => {
           return {
@@ -68,11 +74,11 @@ export const useAuthStore = create(
     {
       name: "auth-store",
       storage: createJSONStorage(() => ({
-            setItem: (key: string, value: string) =>
-              SecureStore.setItemAsync(key, value),
-            getItem: (key: string) => SecureStore.getItemAsync(key),
-            removeItem: (key: string) => SecureStore.deleteItemAsync(key),
-          })),
+        setItem: (key: string, value: string) =>
+          SecureStore.setItemAsync(key, value),
+        getItem: (key: string) => SecureStore.getItemAsync(key),
+        removeItem: (key: string) => SecureStore.deleteItemAsync(key),
+      })),
       onRehydrateStorage: () => {
         return (state) => {
           state?.setHasHydrated(true);
