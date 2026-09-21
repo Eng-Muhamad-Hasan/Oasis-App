@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AppState } from "react-native";
 
 import { supabase } from "@/lib/supabase/client";
-import { useAuthStore } from "../auth-store";
+import { useAuthStore } from "../store/auth-store";
 
 export function useAuthListener() {
   const queryClient = useQueryClient();

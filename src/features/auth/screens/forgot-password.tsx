@@ -11,7 +11,7 @@ import { forgotPasswordSchema, type ForgotPasswordValues } from '@/features/auth
 import { authClient } from '@/lib/auth/auth-client';
 import { appToast } from '@/lib/toast/app-toast';
 
-export default function ForgotPasswordScreen() {
+export function ForgotPasswordScreen() {
   const {
     control,
     handleSubmit,

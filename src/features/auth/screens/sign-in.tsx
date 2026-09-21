@@ -22,13 +22,11 @@ import { CircularLoader } from "@/shared/circular-loader";
 import { useAuthStore } from "@/store/authStore";
 import { useAppTheme } from "@/theme/theme-provider";
 import { Image } from "expo-image";
-import { authService } from "../auth-service";
+import { authService } from "../service/auth-service";
 
 const Brand = require("@/assets/images/Brand-Logo.svg");
 
 export function SignInScreen() {
-  // const redirect = useRouter();
-  // const { refreshSession } = useAuth();
   const { signUp } = useAuthStore();
   const { spacing } = useAppTheme();
   const {

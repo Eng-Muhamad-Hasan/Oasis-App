@@ -9,17 +9,17 @@ import { Card } from '@/components/ui/card';
 import { HeroPanel } from '@/components/ui/hero-panel';
 import { Screen } from '@/components/ui/screen';
 import { getEmailOtpErrorMessage } from '@/features/auth/auth-errors';
-import { useAuth } from '@/features/auth/auth-provider';
+// import { useAuth } from '@/features/auth/auth-provider';
 import { OtpCodeInput } from '@/features/auth/components/otp-code-input';
 import { useOtpCooldown } from '@/features/auth/hooks/use-otp-cooldown';
 import { verifyEmailOtpSchema, type VerifyEmailOtpValues } from '@/features/auth/validation/auth-schemas';
 import { authClient } from '@/lib/auth/auth-client';
 import { appToast } from '@/lib/toast/app-toast';
 
-export default function VerifyEmailScreen() {
+export function VerifyEmailScreen() {
   const params = useLocalSearchParams<{ email?: string }>();
   const email = getStringParam(params.email)?.trim().toLowerCase() ?? '';
-  const { refreshSession } = useAuth();
+  // const { refreshSession } = useAuth();
   const { isCoolingDown, restart: restartCooldown, secondsRemaining } = useOtpCooldown();
   const [isResending, setIsResending] = useState(false);
   const {
@@ -43,7 +43,7 @@ export default function VerifyEmailScreen() {
         return;
       }
 
-      await refreshSession();
+      // await refreshSession();
       appToast.success('Email verified');
     } catch {
       appToast.error('Verification failed', {

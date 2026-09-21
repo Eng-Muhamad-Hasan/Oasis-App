@@ -15,7 +15,7 @@ import { resetPasswordSchema, type ResetPasswordValues } from '@/features/auth/v
 import { authClient } from '@/lib/auth/auth-client';
 import { appToast } from '@/lib/toast/app-toast';
 
-export default function ResetPasswordScreen() {
+export  function ResetPasswordScreen() {
   const params = useLocalSearchParams<{ email?: string }>();
   const email = getStringParam(params.email)?.trim().toLowerCase() ?? '';
   const { isCoolingDown, restart: restartCooldown, secondsRemaining } = useOtpCooldown();
