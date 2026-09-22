@@ -1,29 +1,50 @@
-import { toast } from "sonner-native";
+import { toastiva } from "toastiva";
 
-type ToastOptions = {
-  description?: string;
-};
+type ToastOptions = Parameters<typeof toastiva.success>[1];
+
+const defaultOptions = {
+  animationPreset: "smooth",
+  fill: "#f4eaf7",
+  showProgress: false,
+  showTimestamp: false,
+  styles: {
+    title: { color: "#000" },
+    description: { color: "#000", alignSelf: "center" },
+  },
+} satisfies ToastOptions;
+
+function withDefaults(options?: ToastOptions): ToastOptions {
+  return {
+    ...defaultOptions,
+    ...options,
+    styles: {
+      ...defaultOptions.styles,
+      ...options?.styles,
+    },
+  };
+}
 
 export const appToast = {
   message(title: string, options?: ToastOptions) {
-    return toast(title, options);
+    return toastiva(title, withDefaults(options));
   },
   success(title: string, options?: ToastOptions) {
-    return toast.success(title, options);
+    return toastiva.success(title, withDefaults(options));
   },
   error(title: string, options?: ToastOptions) {
-    return toast.error(title, options);
+    return toastiva.error(title, withDefaults(options));
   },
   warning(title: string, options?: ToastOptions) {
-    return toast.warning(title, options);
+    return toastiva.warning(title, withDefaults(options));
   },
   info(title: string, options?: ToastOptions) {
-    return toast.info(title, options);
+    return toastiva.info(title, withDefaults(options));
   },
   loading(title: string, options?: ToastOptions) {
-    return toast.loading(title, options);
+    return toastiva(title, { ...withDefaults(options), isLoading: true });
   },
   dismiss(id?: string | number) {
-    return toast.dismiss(id);
+    if (id === undefined) return toastiva.dismissAll();
+    return toastiva.dismiss(String(id));
   },
 };

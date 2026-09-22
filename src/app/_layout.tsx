@@ -6,15 +6,13 @@ import { Uniwind } from "uniwind";
 import "../global.css";
 
 import { IntroRevealProvider, SplashOverlay } from "@/components/splash";
+import { useAuthListener } from "@/features/auth/hooks/use-auth-listener";
+import { useAuthStore } from "@/features/auth/store/auth-store";
+import { useOnboardingStore } from "@/features/onboarding/onboarding-store";
 import { AppProviders } from "@/providers/app-providers";
-import { useAuthStore } from "@/store/authStore";
 import { useEffect, useState } from "react";
-import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useAuthListener } from "@/features/auth/hooks/use-auth-listener";
-import { useOnboardingStore } from "@/features/onboarding/onboarding-store";
-
 SplashScreen.preventAutoHideAsync();
 
 // function RootNavigator() {
@@ -112,7 +110,6 @@ export default function RootLayout() {
                 }}
               />
             ) : null}
-            {/* <AppToaster /> */}
           </IntroRevealProvider>
         </AppProviders>
         {/* </ThemeProvider> */}

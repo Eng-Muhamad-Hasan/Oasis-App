@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-const defaultCooldownSeconds = 60;
+const defaultCooldownSeconds = 300;
 
 export function useOtpCooldown(durationSeconds = defaultCooldownSeconds) {
   const [secondsRemaining, setSecondsRemaining] = useState(durationSeconds);
