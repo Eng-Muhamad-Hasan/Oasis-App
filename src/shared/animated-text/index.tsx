@@ -1,22 +1,16 @@
-import { StyleSheet, ViewStyle } from "react-native";
+import { BlurView, type BlurViewProps } from "expo-blur";
 import React, { memo } from "react";
+import { StyleSheet, ViewStyle } from "react-native";
 import Animated, {
-  withTiming,
+  Easing,
+  LinearTransition,
+  useAnimatedProps,
+  useAnimatedStyle,
+  useSharedValue,
   withDelay,
   withSpring,
-  LinearTransition,
-  Easing,
-  useAnimatedProps,
-  useSharedValue,
-  useAnimatedStyle,
+  withTiming,
 } from "react-native-reanimated";
-import { BlurView, type BlurViewProps } from "expo-blur";
-import type {
-  StaggeredTextProps,
-  AnimationConfig,
-  CharacterAnimationParams,
-  CharacterProps,
-} from "./types";
 import {
   DEFAULT_ANIMATION_CONFIG,
   DEFAULT_ENTER_FROM,
@@ -24,9 +18,16 @@ import {
   DEFAULT_EXIT_FROM,
   DEFAULT_EXIT_TO,
 } from "./conf";
+import type {
+  AnimationConfig,
+  CharacterAnimationParams,
+  CharacterProps,
+  StaggeredTextProps,
+} from "./types";
 
-const AnimatedBlurView =
-  Animated.createAnimatedComponent<BlurViewProps>(BlurView);
+const AnimatedBlurView = Animated.createAnimatedComponent(
+  BlurView as React.ComponentType<any>,
+);
 
 const Character: React.FC<CharacterProps> = memo<CharacterProps>(
   ({
@@ -175,7 +176,7 @@ const Character: React.FC<CharacterProps> = memo<CharacterProps>(
       >
         <Animated.Text style={style}>{char}</Animated.Text>
         <AnimatedBlurView
-          style={[StyleSheet.absoluteFillObject, animatedBlurStyle]}
+          style={[StyleSheet.absoluteFill, animatedBlurStyle]}
           animatedProps={animatedBlurProps}
           tint="prominent"
           experimentalBlurMethod={"dimezisBlurView"}

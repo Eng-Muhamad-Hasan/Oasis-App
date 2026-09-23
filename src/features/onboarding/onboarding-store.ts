@@ -1,4 +1,3 @@
-// src/features/onboarding/onboarding-store.ts
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -7,6 +6,7 @@ type OnboardingState = {
   hasCompletedOnboarding: boolean;
   hasHydrated: boolean;
   completeOnboarding: () => void;
+  resetOnboarding: () => void;
   setHasHydrated: (v: boolean) => void;
 };
 
@@ -16,6 +16,7 @@ export const useOnboardingStore = create<OnboardingState>()(
       hasCompletedOnboarding: false,
       hasHydrated: false,
       completeOnboarding: () => set({ hasCompletedOnboarding: true }),
+      resetOnboarding: () => set({ hasCompletedOnboarding: false }),
       setHasHydrated: (hasHydrated) => set({ hasHydrated }),
     }),
     {

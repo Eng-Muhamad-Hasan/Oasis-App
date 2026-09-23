@@ -12,7 +12,6 @@ import {
 import { AuthFormHeader } from "@/features/auth/components/auth-form-header";
 import { AuthScreen } from "@/features/auth/components/auth-screen";
 import { AuthSubmitButton } from "@/features/auth/components/auth-submit-button";
-import { OtpCodeInput } from "@/features/auth/components/otp-code-input";
 import { useOtpCooldown } from "@/features/auth/hooks/use-otp-cooldown";
 import { authService } from "@/features/auth/service/auth-service";
 import {
@@ -20,6 +19,7 @@ import {
   type VerifyEmailOtpValues,
 } from "@/features/auth/validation/auth-schemas";
 import { appToast } from "@/lib/toast/app-toast";
+import { AuthOtpInput } from "../components/auth-otp-input";
 
 export function VerifyEmailScreen() {
   const params = useLocalSearchParams<{ email?: string }>();
@@ -115,8 +115,12 @@ export function VerifyEmailScreen() {
       <Controller
         control={control}
         name="otp"
-        render={({ field: { onBlur, onChange, value } }) => (
-          <OtpCodeInput value={value} onBlur={onBlur} onChange={onChange} />
+        render={({ field: { onChange, value }, fieldState }) => (
+          <AuthOtpInput
+            value={value}
+            onChange={onChange}
+            error={fieldState.error?.message}
+          />
         )}
       />
 

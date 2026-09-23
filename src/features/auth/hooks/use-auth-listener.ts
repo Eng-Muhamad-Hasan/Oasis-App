@@ -1,8 +1,8 @@
-// src/features/auth/use-auth-listener.ts
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { AppState } from "react-native";
 
+import { useOnboardingStore } from "@/features/onboarding/onboarding-store";
 import { supabase } from "@/lib/supabase/client";
 import { useAuthStore } from "../store/auth-store";
 
@@ -13,7 +13,10 @@ export function useAuthListener() {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
       // Keep synchronous: awaiting Supabase calls in here can deadlock
       useAuthStore.getState().handleAuthEvent(event, session);
-      if (event === "SIGNED_OUT") queryClient.clear();
+      if (event === "SIGNED_OUT") {
+        queryClient.clear();
+        useOnboardingStore.getState().resetOnboarding();
+      }
     });
 
     // Android pauses JS timers in the background, so only refresh in the foreground

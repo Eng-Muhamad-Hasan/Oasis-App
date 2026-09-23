@@ -1,13 +1,13 @@
-import type { Control } from 'react-hook-form';
-import { Link } from 'expo-router';
-import { Controller } from 'react-hook-form';
+import { Link } from "expo-router";
+import type { Control } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { HeroPanel } from '@/components/ui/hero-panel';
-import { Screen } from '@/components/ui/screen';
-import { OtpCodeInput } from '@/features/auth/components/otp-code-input';
-import type { ResetPasswordValues } from '@/features/auth/validation/auth-schemas';
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { HeroPanel } from "@/components/ui/hero-panel";
+import { Screen } from "@/components/ui/screen";
+import { AuthOtpInput } from "@/features/auth/components/auth-otp-input";
+import type { ResetPasswordValues } from "@/features/auth/validation/auth-schemas";
 
 type ResetCodeStepProps = {
   control: Control<ResetPasswordValues>;
@@ -42,8 +42,13 @@ export function ResetCodeStep({
         <Controller
           control={control}
           name="otp"
-          render={({ field: { onBlur, onChange, value } }) => (
-            <OtpCodeInput value={value} onBlur={onBlur} onChange={onChange} />
+          render={({ field: { onBlur, onChange, value }, fieldState }) => (
+            <AuthOtpInput
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={fieldState.error?.message}
+            />
           )}
         />
         <Button
@@ -54,7 +59,11 @@ export function ResetCodeStep({
         />
       </Card>
       <Button
-        label={resendSeconds > 0 ? `Request another code in ${resendSeconds}s` : 'Request another code'}
+        label={
+          resendSeconds > 0
+            ? `Request another code in ${resendSeconds}s`
+            : "Request another code"
+        }
         variant="ghost"
         loading={isResending}
         disabled={resendSeconds > 0}

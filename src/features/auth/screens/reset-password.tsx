@@ -12,9 +12,9 @@ import {
   getResetPasswordErrorMessage,
 } from "@/features/auth/auth-errors";
 import { AuthFormHeader } from "@/features/auth/components/auth-form-header";
+import { AuthOtpInput } from "@/features/auth/components/auth-otp-input";
 import { AuthScreen } from "@/features/auth/components/auth-screen";
 import { AuthSubmitButton } from "@/features/auth/components/auth-submit-button";
-import { OtpCodeInput } from "@/features/auth/components/otp-code-input";
 import { useOtpCooldown } from "@/features/auth/hooks/use-otp-cooldown";
 import { authService } from "@/features/auth/service/auth-service";
 import { useAuthStore } from "@/features/auth/store/auth-store";
@@ -147,15 +147,18 @@ export function ResetPasswordScreen() {
           title="Check your email"
           body={`Enter the 6-digit reset code we sent to ${email}.`}
         />
-
         <Controller
           control={control}
           name="otp"
-          render={({ field: { onBlur, onChange, value } }) => (
-            <OtpCodeInput value={value} onBlur={onBlur} onChange={onChange} />
+          render={({ field: { onBlur, onChange, value }, fieldState }) => (
+            <AuthOtpInput
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              error={fieldState.error?.message}
+            />
           )}
         />
-
         <AuthSubmitButton
           label="Verify code"
           loadingLabel="Verifying…"

@@ -22,8 +22,8 @@
     --color-line: oklch(0.9365 0.0027 106.45);
     --color-muted: oklch(0.6949 0.0101 286.13);
     --color-faint: oklch(0.8096 0.0083 286.21);
-    --color-coral: oklch(0.6822 0.1756 26.4);
-    --color-star: oklch(0.853 0.1628 85.16);
+    --color-coral: #f2655c;
+    --color-star: #ffc531;
     --color-white: oklch(1 0 0);
     --color-black: oklch(0 0 0);
     --color-dark: oklch(23.094% 0.00598 271.16);

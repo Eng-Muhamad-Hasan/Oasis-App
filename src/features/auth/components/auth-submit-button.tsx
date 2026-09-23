@@ -3,6 +3,7 @@ import { Text, useWindowDimensions } from "react-native";
 
 import { Button } from "@/shared/button";
 import { CircularLoader } from "@/shared/circular-loader";
+import { OrbitDotLoader } from "@/shared/orbiting-dots";
 
 const PRIMARY_HEX = "#0F1012"; // hex twin of --color-primary (Reanimated can't interpolate oklch)
 
@@ -39,14 +40,16 @@ export function AuthSubmitButton({
 
       <Button.Loading>
         <Button.Indicator>
-          <CircularLoader
+         <OrbitDotLoader numDots={3} size={18}/>
+         
+          {/* <CircularLoader
             activeColor="#fff"
             size={18}
             strokeWidth={2.5}
             enableBlur
             gradientLength={50}
             duration={500}
-          />
+          /> */}
         </Button.Indicator>
         <Button.Label className="p-3 font-semibold text-secondary">
           {loadingLabel}
