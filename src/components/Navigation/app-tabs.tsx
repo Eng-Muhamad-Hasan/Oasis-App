@@ -85,7 +85,7 @@ export default function AppTabs() {
         {/* <TabSlot style={{ height: "100%" }} /> */}
         <TabSlot
           style={{ height: "100%" }}
-          renderToHardwareTextureAndroid
+          
           renderFn={renderFadingTabScreen}
         />
         <TabList asChild>

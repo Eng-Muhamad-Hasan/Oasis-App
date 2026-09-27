@@ -1,6 +1,6 @@
 // src/features/auth/screens/sign-in.tsx
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, router } from "expo-router";
+import { Link, router, useLocalSearchParams } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 import { Pressable, Text, View } from "react-native";
 
@@ -21,16 +21,18 @@ import {
 import { appToast } from "@/lib/toast/app-toast";
 
 export function SignInScreen() {
+  const params = useLocalSearchParams<{ email?: string }>();
+  const prefillEmail =
+    (Array.isArray(params.email) ? params.email[0] : params.email) ?? "";
   const {
     control,
     handleSubmit,
     formState: { isSubmitting, isValid },
   } = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: prefillEmail, password: "" },
     mode: "onChange",
   });
-
   async function submit(values: SignInValues) {
     const email = values.email.trim().toLowerCase();
 
@@ -129,13 +131,13 @@ export function SignInScreen() {
         </Pressable>
       </Link>
 
-      <Link href="/public" asChild>
+      {/* <Link href="/public" asChild>
         <Pressable accessibilityRole="button" className="self-center px-3 py-1">
           <Text className="text-caption text-muted">
             Continue without signing in
           </Text>
         </Pressable>
-      </Link>
+      </Link> */}
     </AuthScreen>
   );
 }

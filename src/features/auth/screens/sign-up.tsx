@@ -47,8 +47,17 @@ export function SignUpScreen() {
 
       if (data.session) return; // "Confirm email" off: onAuthStateChange signs them in
 
-      // Always continue to verification, even for an existing email, so the screen
-      // does not reveal which addresses are registered.
+      // Supabase returns an empty identities array (not an error) when the
+      // email already belongs to a confirmed account.
+      const alreadyRegistered = data.user?.identities?.length === 0;
+      if (alreadyRegistered) {
+        appToast.error("You already have an account", {
+          description: "Sign in with that email instead.",
+        });
+        router.replace({ pathname: "/sign-in", params: { email } });
+        return;
+      }
+
       router.replace({ pathname: "/verify-email", params: { email } });
     } catch {
       appToast.error("Account creation failed", {
@@ -145,7 +154,7 @@ export function SignUpScreen() {
         disabled={!isValid}
         onPress={() => void handleSubmit(submit)()}
       />
-   
+
       <Link href="/sign-in" asChild>
         <Pressable accessibilityRole="button" className="self-center p-1">
           <AppText variant="caption" tone="muted">

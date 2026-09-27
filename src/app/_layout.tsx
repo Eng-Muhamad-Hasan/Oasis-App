@@ -80,7 +80,6 @@ function RootNavigator() {
         <Stack.Screen name="hotel/[id]" />
         <Stack.Screen name="(modals)" options={{ presentation: "modal" }} />
       </Stack.Protected>
-      <Stack.Screen name="(public)" />
     </Stack>
   );
 }
